@@ -8,6 +8,7 @@ class bugzilla::webhead (
   $bugzilla_db_host = "127.0.0.1",
   $bugzilla_db_port = "3306",
   $bugzilla_db_database = "bugzilla3",
+  $bugzilla_url = "bugzilla.$domain"
   ) {
 
     if $operatingsystem != "debian" {
@@ -34,6 +35,19 @@ class bugzilla::webhead (
       ensure  => file,
       require => Package['bugzilla3'],
       content  => template("bugzilla/webhead/localconfig.erb"),
+    }
+
+
+    file { '/etc/apache2/sites-available/bugzilla':
+      ensure  => file,
+      require => Package['apache2'],
+      content  => template("bugzilla/webhead/vhost.erb"),
+    }
+
+    file { '/etc/apache2/sites-enabled/bugzilla':
+      ensure  => link,
+      target  => "/etc/apache2/sites-available/bugzilla",
+      require => File['/etc/apache2/sites-available/bugzilla'],
     }
 
   }

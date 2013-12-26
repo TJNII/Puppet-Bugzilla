@@ -1,0 +1,15 @@
+#
+# PUPPET MANAGED FILE: DO NOT EDIT
+#
+
+<VirtualHost *:80>
+   ServerName <%= bugzilla_url %>
+   ServerAdmin  <%= bugzilla_admin_email %>
+   DocumentRoot /usr/share/bugzilla3/web
+   DirectoryIndex index.cgi
+   <Directory /usr/share/bugzilla3/web>
+     AllowOverride All
+     Order Deny,Allow
+     Allow from all
+   </Directory>
+</VirtualHost>
