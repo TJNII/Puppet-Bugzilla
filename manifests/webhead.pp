@@ -3,6 +3,11 @@ class bugzilla::webhead (
   $bugzilla_admin_email,
   $bugzilla_admin_name,
   $bugzilla_admin_password,
+  $bugzilla_db_user = "bugs",
+  $bugzilla_db_passwd,
+  $bugzilla_db_host = "127.0.0.1",
+  $bugzilla_db_database = "bugzilla3",
+  
   ) {
 
     if $operatingsystem != "debian" {
@@ -18,5 +23,12 @@ class bugzilla::webhead (
       require => Package['bugzilla3'],
       content  => template("bugzilla/webhead/answerfile.erb"),
     }
+
+    file { '/etc/dbconfig-common/bugzilla3.conf':
+      ensure  => file,
+      require => Package['bugzilla3'],
+      content  => template("bugzilla/webhead/bugzilla3.conf.erb"),
+    }
+
   }
             
