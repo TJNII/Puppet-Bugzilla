@@ -6,8 +6,8 @@ class bugzilla::webhead (
   $bugzilla_db_user = "bugs",
   $bugzilla_db_passwd,
   $bugzilla_db_host = "127.0.0.1",
+  $bugzilla_db_port = "3306",
   $bugzilla_db_database = "bugzilla3",
-  
   ) {
 
     if $operatingsystem != "debian" {
@@ -28,6 +28,12 @@ class bugzilla::webhead (
       ensure  => file,
       require => Package['bugzilla3'],
       content  => template("bugzilla/webhead/bugzilla3.conf.erb"),
+    }
+
+    file { '/usr/share/bugzilla3/debian/localconfig':
+      ensure  => file,
+      require => Package['bugzilla3'],
+      content  => template("bugzilla/webhead/localconfig.erb"),
     }
 
   }
