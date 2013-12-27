@@ -36,6 +36,12 @@ class bugzilla::webhead (
       require => Package['bugzilla3'],
       content  => template("bugzilla/webhead/localconfig.erb"),
     }
+    # I think the website uses this one...
+    file { '/etc/bugzilla3/localconfig':
+      ensure  => file,
+      require => Package['bugzilla3'],
+      content  => template("bugzilla/webhead/localconfig.erb"),
+    }
 
 
     file { '/etc/apache2/sites-available/bugzilla':
