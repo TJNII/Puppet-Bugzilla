@@ -1,4 +1,7 @@
 # bugzilla webhead: Configure a Bugzilla web server
+#
+# This (the package) installs crons and such and is not ready for a scaled deployment
+#
 class bugzilla::webhead (
   $bugzilla_admin_email,
   $bugzilla_admin_name,
@@ -73,5 +76,6 @@ class bugzilla::webhead (
         mode    => 755,
       }
     }
+
   }
             
