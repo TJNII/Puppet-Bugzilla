@@ -8,7 +8,8 @@ class bugzilla::webhead (
   $bugzilla_db_host = "127.0.0.1",
   $bugzilla_db_port = "3306",
   $bugzilla_db_database = "bugzilla3",
-  $bugzilla_url = "bugzilla.$domain"
+  $bugzilla_url = "bugzilla.$domain",
+  $bugzilla_newbug_whining = true,
   ) {
 
     if $operatingsystem != "debian" {
@@ -56,5 +57,21 @@ class bugzilla::webhead (
       require => File['/etc/apache2/sites-available/bugzilla'],
     }
 
+    # Disable the "whineatnews.pl" script to curtail whining
+    # The bugzilla3 cron tests that it is executable before running
+    # http://www.bugzilla.org/docs/2.20/html/extraconfig.html
+    if  $bugzilla_newbug_whining == false {
+      file { '/usr/share/bugzilla3/lib/whineatnews.pl':
+        ensure  => file,
+        require => Package['bugzilla3'],
+        mode    => 644,
+      }
+    } else {
+      file { '/usr/share/bugzilla3/lib/whineatnews.pl':
+        ensure  => file,
+        require => Package['bugzilla3'],
+        mode    => 755,
+      }
+    }
   }
             
