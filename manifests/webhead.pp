@@ -19,6 +19,8 @@ class bugzilla::webhead (
       fail("bugzilla::webhead only supports Debian at this time.")
     }
 
+    include "genericservice::apache"
+    
     package { 'bugzilla3':
       ensure => installed,
     }
@@ -50,7 +52,7 @@ class bugzilla::webhead (
 
     file { '/etc/apache2/sites-available/bugzilla':
       ensure  => file,
-      require => Package['apache2'],
+      require => Class['genericservice::apache'],
       content  => template("bugzilla/webhead/vhost.erb"),
     }
 
