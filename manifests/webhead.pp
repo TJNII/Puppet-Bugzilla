@@ -57,7 +57,7 @@ class bugzilla::webhead (
 
     file { '/etc/apache2/sites-available/bugzilla':
       ensure  => file,
-      require => Class['genericservice::apache'],
+      require => Package['httpd'],
       content  => template("bugzilla/webhead/vhost.erb"),
     }
 
