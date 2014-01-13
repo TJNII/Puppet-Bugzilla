@@ -65,6 +65,7 @@ class bugzilla::webhead (
       ensure  => link,
       target  => "/etc/apache2/sites-available/bugzilla",
       require => File['/etc/apache2/sites-available/bugzilla'],
+      notify  => Service['apache2'],
     }
 
     # Disable the "whineatnews.pl" script to curtail whining
