@@ -6,13 +6,18 @@ class bugzilla::webhead (
   $bugzilla_admin_email,
   $bugzilla_admin_name,
   $bugzilla_admin_password,
-  $bugzilla_db_user = "bugs",
   $bugzilla_db_passwd,
-  $bugzilla_db_host = "127.0.0.1",
-  $bugzilla_db_port = "3306",
-  $bugzilla_db_database = "bugzilla3",
-  $bugzilla_url = "bugzilla.$domain",
+  $bugzilla_db_user        = "bugs",
+  $bugzilla_db_host        = "127.0.0.1",
+  $bugzilla_db_port        = "3306",
+  $bugzilla_db_database    = "bugzilla3",
+  $bugzilla_url            = "bugzilla.$domain",
   $bugzilla_newbug_whining = true,
+  $bugzilla_enable_ssl     = true,
+  $bugzilla_require_ssl    = false,
+  $bugzilla_ssl_cert       = "/etc/ssl/certs/ssl-cert-snakeoil.pem",
+  $bugzilla_ssl_key        = "/etc/ssl/private/ssl-cert-snakeoil.key",
+  $bugzilla_ssl_ip         = "*",
   ) {
 
     if $operatingsystem != "debian" {
