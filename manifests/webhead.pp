@@ -85,5 +85,14 @@ class bugzilla::webhead (
       }
     }
 
+    if $bugzilla_require_ssl == true {
+      file { '/etc/apache2/mods-enabled/rewrite.load':
+        ensure  => link,
+        target  => "/etc/apache2/mods-available/rewrite.load",
+        notify  => Service['httpd'],
+      }
+    }
+
+
   }
             
