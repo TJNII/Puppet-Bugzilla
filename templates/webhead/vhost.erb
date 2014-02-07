@@ -32,8 +32,8 @@
    DocumentRoot /usr/share/bugzilla3/web
    DirectoryIndex index.cgi
 
-   ErrorLog ${APACHE_LOG_DIR}/bugzilla_http_error.log
-   CustomLog ${APACHE_LOG_DIR}/bugzilla_http_access.log combined
+   ErrorLog ${APACHE_LOG_DIR}/bugzilla_http_ssl_error.log
+   CustomLog ${APACHE_LOG_DIR}/bugzilla_http_ssl_access.log combined
 
    SSLEngine on
    SSLCertificateFile    <%= bugzilla_ssl_cert %>
