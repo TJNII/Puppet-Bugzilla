@@ -25,8 +25,9 @@ class bugzilla::webhead (
     }
 
     include "genericservice::apache"
-    
-    package { 'bugzilla3':
+
+    # The libnet packages are for SMTP auth for registration emails
+    package { ['bugzilla3', 'libnet-smtp-ssl-perl', 'libnet-smtp-tls-perl', 'libnet-smtpauth-perl']:
       ensure => installed,
     }
 
